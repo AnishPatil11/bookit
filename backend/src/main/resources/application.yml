@@ -1,0 +1,63 @@
+server:
+  port: ${PORT:8080}
+  shutdown: graceful
+  forward-headers-strategy: framework   # correct client IP/scheme behind Render's proxy
+
+spring:
+  application:
+    name: bookit
+  autoconfigure:
+    # We issue our own JWTs, so Spring's generated default user must not exist.
+    exclude: org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/bookit}
+    username: ${DB_USER:bookit}
+    password: ${DB_PASSWORD:bookit}
+    hikari:
+      maximum-pool-size: ${DB_POOL_SIZE:5}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate   # Flyway owns the schema; Hibernate only checks that entities match it
+    properties:
+      hibernate:
+        default_batch_fetch_size: 50
+  flyway:
+    locations: classpath:db/migration,classpath:db/migration-postgres
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      probes:
+        enabled: true
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+app:
+  zone: ${APP_ZONE:Asia/Kolkata}
+  jwt:
+    secret: ${JWT_SECRET:dev-only-secret-change-me-before-deploying-1234567890}
+    expiration-minutes: ${JWT_EXPIRATION_MINUTES:120}
+  cors:
+    allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:5173}
+  reservation:
+    slot-minutes: 90          # how long a table is held for one booking
+    slot-step-minutes: 30     # booking start times are offered every 30 minutes
+    cancel-cutoff-hours: 2    # customers can cancel up to 2 hours before the start
+    max-days-ahead: 60
+  seed:
+    admin-email: ${SEED_ADMIN_EMAIL:admin@bookit.dev}
+    admin-password: ${SEED_ADMIN_PASSWORD:Admin@12345}
+    demo-data: ${SEED_DEMO_DATA:true}
+
+logging:
+  level:
+    com.bookit: INFO
