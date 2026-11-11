@@ -15,7 +15,7 @@ A restaurant table-booking and pre-ordering platform. Customers search restauran
 ## Screenshots
 
 ### Browse restaurants
-![Restaurant list](docs\screenshots\restaurants.png.png)
+![Restaurant list](docs/screenshots/restaurants.png.png)
 
 ### Live availability and booking
 Slots that are already taken are crossed out.
