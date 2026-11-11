@@ -138,6 +138,8 @@ cd backend && mvn test      # unit + integration tests on in-memory H2
 cd frontend && npm test     # Vitest
 ```
 
+All 30 backend tests pass (`mvn test`), including a concurrency test where 8 simultaneous bookings compete for one table and exactly one succeeds.
+
 | Test | What it proves |
 |---|---|
 | `BookingConcurrencyTest` | 8 concurrent bookings for one table: exactly 1 succeeds, 7 get `409` |
