@@ -14,7 +14,19 @@ A restaurant table-booking and pre-ordering platform. Customers search restauran
 
 ## Screenshots
 
-_Add 3 to 4 screenshots here: restaurant list, booking slots, admin dashboard, Swagger UI._
+### Browse restaurants
+![Restaurant list](docs/screenshots/restaurants.png)
+
+### Live availability and booking
+Slots that are already taken are crossed out.
+
+![Booking slots](docs/screenshots/booking.png)
+
+### Admin: kitchen queue and dashboard
+![Admin dashboard](docs/screenshots/admin.png)
+
+### API documentation (Swagger UI)
+![Swagger UI](docs/screenshots/swagger.png)
 
 ## What makes it more than a CRUD app
 
